@@ -1,6 +1,4 @@
-package com.libraryproject.LibraryProject.Domain;
-
-import java.util.Date;
+package com.libraryproject.libraryProject.domain;
 
 public class Authors {
     private int authorID;

@@ -1,4 +1,4 @@
-package com.libraryproject.LibraryProject.Domain;
+package com.libraryproject.libraryProject.domain;
 
 import java.util.Date;
 import java.util.List;
