@@ -1,12 +1,21 @@
 package com.libraryproject.libraryProject.domain;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Entity
 public class Orders {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderID;
-    private int userID;
-    private List<Books> BookIdList;
+
+    @ManyToOne
+    private Users user;
+
+    @ManyToMany
+    private List<Books> booksList;
+
     private Date issueDate;
     private Date returnDate;
     private OrderStatus orderInfo;
@@ -14,10 +23,10 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(int orderID, int userID, List<Books> bookIdList, Date issueDate, Date returnDate, OrderStatus orderInfo) {
+    public Orders(int orderID, Users user, List<Books> booksList, Date issueDate, Date returnDate, OrderStatus orderInfo) {
         this.orderID = orderID;
-        this.userID = userID;
-        BookIdList = bookIdList;
+        this.user = user;
+        this.booksList = booksList;
         this.issueDate = issueDate;
         this.returnDate = returnDate;
         this.orderInfo = orderInfo;
@@ -31,20 +40,20 @@ public class Orders {
         this.orderID = orderID;
     }
 
-    public int getUserID() {
-        return userID;
+    public Users getUser() {
+        return user;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setUser(Users user) {
+        this.user = user;
     }
 
-    public List<Books> getBookIdList() {
-        return BookIdList;
+    public List<Books> getBooksList() {
+        return booksList;
     }
 
-    public void setBookIdList(List<Books> bookIdList) {
-        BookIdList = bookIdList;
+    public void setBooksList(List<Books> booksList) {
+        this.booksList = booksList;
     }
 
     public Date getIssueDate() {

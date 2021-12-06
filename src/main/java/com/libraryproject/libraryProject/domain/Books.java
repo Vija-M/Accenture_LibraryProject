@@ -1,22 +1,44 @@
 package com.libraryproject.libraryProject.domain;
 
-public class Books {
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+public class Books {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String title;
-    public int authorID;
+
+    @ManyToMany(mappedBy = "booksList", cascade = {CascadeType.MERGE})
+    @OrderBy("authorID ASC")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Authors> authorsList;
+
     private String url;
+
+    @Enumerated
     private Availability availability;
+
+    @ManyToMany(mappedBy = "booksList", cascade = {CascadeType.MERGE})
+    @OrderBy("orderID ASC")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Orders> bookOrders;
 
     public Books() {
     }
 
-    public Books(int id, String title, int authorID, String url, Availability availability) {
+    public Books(int id, String title, List<Authors> authorsList, String url, Availability availability, List<Orders> bookOrders) {
         this.id = id;
         this.title = title;
-        this.authorID = authorID;
+        this.authorsList = authorsList;
         this.url = url;
         this.availability = availability;
+        this.bookOrders = bookOrders;
     }
 
     public int getId() {
@@ -35,12 +57,20 @@ public class Books {
         this.title = title;
     }
 
-    public int getAuthorID() {
-        return authorID;
+    public List<Authors> getAuthorsList() {
+        return authorsList;
     }
 
-    public void setAuthorID(int authorID) {
-        this.authorID = authorID;
+    public void setAuthorsList(List<Authors> authorsList) {
+        this.authorsList = authorsList;
+    }
+
+    public List<Orders> getBookOrders() {
+        return bookOrders;
+    }
+
+    public void setBookOrders(List<Orders> bookOrders) {
+        this.bookOrders = bookOrders;
     }
 
     public String getUrl() {

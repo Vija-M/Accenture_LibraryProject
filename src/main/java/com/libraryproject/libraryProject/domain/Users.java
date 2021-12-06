@@ -1,12 +1,28 @@
 package com.libraryproject.libraryProject.domain;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
 public class Users {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userID;
+
     private String userFullName;
     private String email;
     private String phone;
     private String password;
+    @Enumerated
     private AccessLevel accessLevel;
+
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE})
+    @OrderBy("orderID DESC")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Orders> myOrders;
 
     public Users() {
     }

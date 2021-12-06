@@ -1,9 +1,19 @@
 package com.libraryproject.libraryProject.domain;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
 public class Authors {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int authorID;
+
     private String authorName;
     private String authorCountry;
+
+    @ManyToMany
+    private List<Books> booksList;
 
     public Authors() {
     }
