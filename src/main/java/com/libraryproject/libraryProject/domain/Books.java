@@ -88,4 +88,16 @@ public class Books {
     public void setAvailability(Availability availability) {
         this.availability = availability;
     }
+
+    @Override
+    public String toString() {
+        return "Books{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", authorsList=" + authorsList +
+                ", url='" + url + '\'' +
+                ", availability=" + availability +
+                ", bookOrders=" + bookOrders +
+                '}';
+    }
 }
