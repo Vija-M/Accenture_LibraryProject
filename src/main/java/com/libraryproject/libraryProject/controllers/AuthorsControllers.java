@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 /*@Controller
-@RequestMapping(path = "/books")*/
+@RequestMapping(path = "/authors")*/
 public class AuthorsControllers {
 
     @Autowired
